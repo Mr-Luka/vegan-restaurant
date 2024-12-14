@@ -79,58 +79,53 @@ span.picked-span {
     animation-timing-function: linear;
 }
 .gallery {
-    background-color: #4caf4f00;
-}
-.slider {
-    max-width: 450px;
-    margin: 0 auto;
-    padding-top: 1em;
-    --slide-count: 3;
-    --slide-width: calc(
-        (100% / var(--slide-count)) - 1.2em);  
-    width: 100%;
-    height: 35em;
     position: relative;
     overflow: hidden;
-    perspective: 1000px;
+    width: 100%;
+    padding: 40px 0;
+}
+.slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.wrapper {
+    display: flex;
+    gap: 30px; /* Space between images */
+    transition: transform 0.5s ease-in-out; /* Smooth sliding effect */
+    will-change: transform;
 }
 
-.wrapper {
-    transform-style: preserve-3d;
-}
 .slide {
-    position: absolute;
-    width: var(--slide-width);
-    padding-top: 30%;
-    border-radius: 7px;
-    transition: 300ms ease-out;
-    overflow: hidden;
+    min-width: 200px; /* Adjust width as needed */
+    flex-shrink: 0;
+    display: flex;
+    justify-content: center;
 }
+
 .slide img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 180%;
-    height: 100%;
-    z-index: 0;
-    transition: 400mx ease-in-out;
+    max-height: 300px; /* Keep image size consistent */
+    object-fit: contain;
 }
 
 .buttons {
-    width: 98%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    align-items: center;
-}
-.buttons img {
-    width: 2em;
-}
-.buttons img:hover {
-    scale: 1.5;
+    pointer-events: none;
 }
 
-.slide:nth-child(1){
-    left: calC((var-(--slide-width) * -1));
+.buttons img {
+    pointer-events: auto;
+    cursor: pointer;
+    width: 50px;
+    height: 50px;
+    opacity: 0.8;
+    transition: opacity 0.2s;
 }
 
 

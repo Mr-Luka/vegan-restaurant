@@ -81,17 +81,18 @@ span.picked-span {
 
 .slider {
     width: 100%;
-    max-width: 100vw;
-    height: 400px;
+    height: 300px;
     margin: auto;
     position: relative;
     overflow: hidden;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 .list {
     position: absolute;
-    top: 0%;
+    top: 13%;
     left: 16%;
-    height: 100%;
+    height: 150%;
     display: flex;
     width: max-content;
     transition: 1s;
@@ -105,7 +106,7 @@ span.picked-span {
 
 .buttons {
     position: absolute;
-    top: 20%;
+    top: 50%;
     left: 5%;
     width: 95%;
     height: 12%;
@@ -116,11 +117,6 @@ span.picked-span {
     width: 30%;
     height: 20px;
 }
-
-
-
-
-
 
 
 

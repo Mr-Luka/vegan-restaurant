@@ -85,6 +85,7 @@ span.picked-span {
     height: 400px;
     margin: auto;
     position: relative;
+    overflow: hidden;
 }
 .list {
     position: absolute;
@@ -93,6 +94,7 @@ span.picked-span {
     height: 100%;
     display: flex;
     width: max-content;
+    transition: 1s;
 }
 .list img {
     width: 100%;

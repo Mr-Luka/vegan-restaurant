@@ -97,16 +97,25 @@ span.picked-span {
     will-change: transform;
 }
 
+.slider {
+    overflow: hidden;        /* Hide content outside the slider */
+    width: 100%;             /* Adjust slider width to parent */
+    height: auto;            /* Ensure the slider adapts to content */
+}
+
 .slide {
-    min-width: 200px; /* Adjust width as needed */
-    flex-shrink: 0;
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center image horizontally */
+    align-items: center;    /* Center image vertically */
+    flex-shrink: 0;         /* Prevent slides from shrinking */
+    width: 100%; 
 }
 
 .slide img {
-    max-height: 300px; /* Keep image size consistent */
-    object-fit: contain;
+    max-width: 50%;         /* Make sure images don't overflow */
+    height: auto;            /* Maintain aspect ratio */
+    object-fit: contain;     /* Scale images to fit inside their divs */
+
 }
 
 .buttons {

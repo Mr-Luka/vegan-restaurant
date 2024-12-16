@@ -51,6 +51,8 @@ header button:hover {
     box-shadow: 2px 5px 12px 2px #4CAF50;
 }
 
+
+
 .catch-phrase {
     display: flex;
     justify-content: center;
@@ -74,6 +76,77 @@ header button:hover {
 span.picked-span {
     animation: fadeLeft 3700ms ease-in-out forwards;
 }
+
+ /* MODAL */
+ .modal-whole{
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items:flex-end;
+    margin: 5rem 0 0 2rem;
+    width: 80%;
+    height: 50%;
+    z-index: 1;
+ }
+ .x-modal {
+    font-size: 1rem;
+    color:red;
+    border: none;
+    background-color: transparent;
+    animation-name: spin;
+    animation-duration: 4000ms;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+ }
+.x-modal:hover {
+    font-weight: 800;
+    scale: 1.8;
+}
+
+.modal-wrapper{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(116, 243, 122, 0.14);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    line-height: 1rem;
+    box-shadow: 0px 25px 20px -2px #4CAF50;
+}
+.modal-wrapper h2{
+    margin-top: 5rem;
+}
+.modal-wrapper h2,
+.modal-wrapper h1{
+    font-size: 2rem;
+    color: rgb(255, 0, 0);
+    -webkit-text-stroke-width: 2px;
+    -webkit-text-stroke-color: rgb(137, 1, 1);
+}
+.modal-wrapper h1{
+    font-size: 4rem;
+}
+.modal-wrapper p{
+    font-size: 1.5rem;
+}
+
+.modal-wrapper button {
+    font-size: 2rem;
+    color: white;
+    background-color: #4CAF50;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 10px;
+}
+.modal-wrapper button:hover {
+    background-color: #3e8e4133;
+    border: 2px solid #4CAF50;
+}
+
+
+/* END OF MODAL */
+
 
 #beet-spin {
     margin-top: 5rem;
@@ -192,6 +265,8 @@ div.meal {
 }
 .meal-image img {
     width: 100%;
+    border-bottom-left-radius: 20px;
+    border-top-left-radius: 20px;
 }
 
 button.new-recipe-button {
@@ -340,6 +415,9 @@ footer h4 {
     align-items: center;
 }
 
+.hidden{
+    display: none;
+}
 
 @keyframes spin { 
         from { 
@@ -347,6 +425,11 @@ footer h4 {
         } to { 
             transform: rotate(360deg); 
         }
+}
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
 }
 @keyframes fadeLeft {
     0% {
@@ -421,6 +504,10 @@ footer h4 {
 
     .catch-phrase h2 {
         font-size: 3rem;
+    }
+
+    .modal-whole{
+        margin-left: 7rem;
     }
 
     .meals {

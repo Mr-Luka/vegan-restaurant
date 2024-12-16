@@ -72,3 +72,6 @@ function initializeSlider() {
 
 // Run the initialization
 initializeSlider();
+
+
+// MODAL

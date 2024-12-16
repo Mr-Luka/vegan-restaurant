@@ -85,7 +85,7 @@ span.picked-span {
     align-items:flex-end;
     margin: 5rem 0 0 2rem;
     width: 80%;
-    height: 50%;
+    height: auto;
     z-index: 1;
     background-color: rgba(116, 243, 122, 0.14);
     backdrop-filter: blur(10px);
@@ -139,13 +139,47 @@ span.picked-span {
     border: none;
     padding: 1rem 2rem;
     border-radius: 10px;
+    margin-bottom: 3rem;
 }
 .modal-wrapper button:hover {
     background-color: #3e8e4133;
     border: 2px solid #4CAF50;
 }
-
-
+ /* SignUP */
+.signup {
+    width: 95%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+}
+.signup-box{
+    width: 100%;
+}
+form.register-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+form.register-form label {
+    margin-bottom: .3rem;
+    margin-top: 0.7rem;
+}
+form.register-form input {
+    border: none;
+    border-radius: 10px;
+    padding: .5rem .5rem .5rem .5rem;
+    background-color: rgba(0, 77, 27, 0.412);
+}
+form.register-form button {
+    font-size: 1rem;
+    margin: 1rem 0;
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 10px;
+    background-color: #af4c4c;
+    color: white;
+    box-shadow: 0 8px 32px 0 rgba(142, 0, 0, 0.906);
+}
 /* END OF MODAL */
 
 

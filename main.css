@@ -87,6 +87,11 @@ span.picked-span {
     width: 80%;
     height: 50%;
     z-index: 1;
+    background-color: rgba(116, 243, 122, 0.14);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    line-height: 1rem;
+    box-shadow: 0px 25px 20px -2px #4CAF50;
  }
  .x-modal {
     font-size: 1rem;
@@ -108,11 +113,7 @@ span.picked-span {
     text-align: center;
     width: 100%;
     height: 100%;
-    background-color: rgba(116, 243, 122, 0.14);
-    backdrop-filter: blur(10px);
-    border-radius: 50px;
-    line-height: 1rem;
-    box-shadow: 0px 25px 20px -2px #4CAF50;
+    
 }
 .modal-wrapper h2{
     margin-top: 5rem;

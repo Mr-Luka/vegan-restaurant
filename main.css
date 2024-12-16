@@ -1,6 +1,6 @@
 body {
     max-width: 480px;
-    background-color: rgb(240, 236, 236);
+    background-color: rgba(255, 255, 255, 0.428);
     font-family: "Balsamiq Sans", serif;
     margin: 0 auto;
 }
@@ -98,7 +98,7 @@ span.picked-span {
 .list {
     position: absolute;
     top: 13%;
-    left: 16%;
+    left: 0%;
     height: 150%;
     display: flex;
     width: max-content;
@@ -397,22 +397,26 @@ footer h4 {
     }
 }
 
-
+ /* tablets */
 @media (min-width: 768px) {
     body {
-        max-width: 768px;
+         max-width: 100%;
     }
 
     header {
-        padding: 1rem 2rem;
+        transition: 0.3s;
+        padding: 0.1rem 0rem;
     }
 
     header h3 {
+        transition: 0.3s;
         font-size: 1.2rem;
     }
 
     header h1 {
+        transition: 0.3s;
         font-size: 2rem;
+        margin-right: 6rem;
     }
 
     .catch-phrase h2 {
@@ -430,13 +434,20 @@ footer h4 {
         width: 48%;
         padding: 1rem;
     }
+    .meal h2 {
+        font-size: 1.5rem;
+    }
+    .meal p {
+        font-size: 1rem;
+    }
 
     .meal-image {
-        width: 50%;
+        width: 60%;
     }
 
     button.new-recipe-button {
-        margin-left: 2rem;
+        transition: 0.3s;
+        margin-left: 31rem;
     }
 
     .featured-marketing img {
@@ -444,7 +455,8 @@ footer h4 {
     }
 
     .text-over-video {
-        font-size: 1.5rem;
+        transition: 0.3s;
+        font-size: 3rem;
     }
 }
 

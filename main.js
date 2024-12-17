@@ -73,5 +73,38 @@ function initializeSlider() {
 // Run the initialization
 initializeSlider();
 
+// Featured on: loop
+document.addEventListener("DOMContentLoaded", () => {
+    const featuredMarketing = document.querySelector(".featured-marketing");
+    // Clone the images and append them to the container
+    featuredMarketing.innerHTML += featuredMarketing.innerHTML;
+    featuredMarketing.innerHTML += featuredMarketing.innerHTML;
+    featuredMarketing.innerHTML += featuredMarketing.innerHTML;
+});
 
-// MODAL
+async function fetchVeganRecipes() {
+  const apiUrl = "https://the-vegan-recipes-db.p.rapidapi.com/";
+  const apiKey = "d3afb4afc6msh95d0b73034a9df9p1bcbb6jsncb4c4430bb66"; // Your API key
+
+  try {
+    const response = await fetch(apiUrl, {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": apiKey, // Your API key
+        "X-RapidAPI-Host": "the-vegan-recipes-db.p.rapidapi.com", // Correct API host
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log(data); // Logs the full response object to the console
+  } catch (error) {
+    console.error("Error fetching data:", error.message); // Logs error if any
+  }
+}
+
+fetchVeganRecipes();
+

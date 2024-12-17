@@ -226,6 +226,27 @@ if(signUpBtn){
     })
 }
 
+// function that will check if user has entered correct characters for emailInput, name, password
+function handleRegister(name, lastName, email, password, passwordMatch){
+
+  const validNameInput = /^[a-zA-Z\s'-]+$/;
+  const validLastNameInput = /^[a-zA-Z\s'-]+$/;
+  const validEmailInput =  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const validPasswordInput = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+
+  if(!validNameInput.test(name) || !validLastNameInput.test(lastName)){
+    alert('Please enter correct letters for your full name')
+  } else if (!validEmailInput.test(email)){
+    alert('Please enter a valid email')
+  } else if (!validPasswordInput.test(password)){
+    alert("Please enter a valid password, at least 8 characters, 1 uppercase, 1 lowercase, 1 number, 1 special character)")
+  } else if (password !== passwordMatch){
+    alert('Passwords do not match')
+  } else {
+    localStorage.setItem('registration', JSON.stringify(registration));
+}
+
 if(submitRegister) {
   submitRegister.addEventListener('click', handleRegister)
+  }
 }

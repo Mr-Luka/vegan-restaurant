@@ -2,6 +2,7 @@ const list = document.querySelector('.slider .list');
 const items = Array.from(document.querySelectorAll('.slider .list .item')); // Convert NodeList to array
 const prev = document.querySelector('#prev');
 const next = document.querySelector('#next');
+const meals = document.querySelector('.meals');
 
 let active = 1; // Start at 1 (first original slide)
 let totalItems = items.length; // Total slides (including clones)
@@ -82,6 +83,8 @@ document.addEventListener("DOMContentLoaded", () => {
     featuredMarketing.innerHTML += featuredMarketing.innerHTML;
 });
 
+
+// Fetching VEGAN FOOD recipes API
 async function fetchVeganRecipes() {
   const apiUrl = "https://the-vegan-recipes-db.p.rapidapi.com/";
   const apiKey = "d3afb4afc6msh95d0b73034a9df9p1bcbb6jsncb4c4430bb66"; // Your API key
@@ -100,6 +103,7 @@ async function fetchVeganRecipes() {
     }
 
     const data = await response.json();
+    displayRecipes(data);
     console.log(data); // Logs the full response object to the console
   } catch (error) {
     console.error("Error fetching data:", error.message); // Logs error if any
@@ -107,4 +111,21 @@ async function fetchVeganRecipes() {
 }
 
 fetchVeganRecipes();
+
+function displayRecipes (data){
+    const random = Math.floor(Math.random() * 385)-1;
+    const recipe = data[random];
+
+    const meal = document.createElement('div');
+    meal.classList.add('meal');
+    meal.innerHTML = `
+        <div class="test-about-meal">
+            <h2>${recipe.title}</h2>
+        </div>
+        <button class="new-recipe-button">New Dish</button>
+        <div class="meal-image">
+            <img class="meal-recepie" src="${recipe.image}" alt="meal picture">
+        </div>`;
+    meals.appendChild(meal);
+}
 

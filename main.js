@@ -15,7 +15,13 @@ const registerInputs = document.querySelector('.register-form-inputs');
 let active = 1; // Start at 1 (first original slide)
 let totalItems = items.length; // Total slides (including clones)
 
-
+//created an object that will save the information when we sign-up, so the user can use the info in their account
+let registration = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    password: '',
+}
 
 
 
@@ -204,32 +210,39 @@ function regenerateRecipe(meal, data) {
 
 
 
-
-window.addEventListener('scroll', ()=> {
- 
-  if(window.scrollY > 500) {
-    modal.classList.remove('hidden');
-  } 
-
-  if(!modal.classList.contains('hidden')){
-      xBtn.addEventListener('click', ()=>{
-      modal.classList.add('hidden');
-      signupWindow.classList.add('hidden');
-      modalDiscount.classList.remove('hidden');
-    })
-  }
-})
-
-if(signUpBtn){
-  signUpBtn.addEventListener('click', ()=>{
-      modalDiscount.classList.add('hidden');
-      signupWindow.classList.remove('hidden');
-    })
+// function that will close the modal
+function closeModal (){
+    modal.classList.add('hidden');
+    signupWindow.classList.add('hidden');
+    modalDiscount.classList.remove('hidden');
 }
 
-// function that will check if user has entered correct characters for emailInput, name, password
-function validateRegisterInput(name, lastName, email, password, passwordMatch){
+// function that will activate the modal
+function openModal (){
+  window.addEventListener('scroll', ()=> {
+   
+    if(window.scrollY > 500) {
+      modal.classList.remove('hidden');
+    } 
+  
+    if(!modal.classList.contains('hidden')){
+        xBtn.addEventListener('click', ()=>{
+        closeModal ()
+      })
+    }
+  })
+  
+  if(signUpBtn){
+    signUpBtn.addEventListener('click', ()=>{
+        modalDiscount.classList.add('hidden');
+        signupWindow.classList.remove('hidden');
+      })
+  }
+}
+openModal ()
 
+// Validate if the entered input is equal to the given input character rules
+function validRegisterInput (name, lastName, email, password, passwordMatch){
   const validNameInput = /^[a-zA-Z\s'-]+$/;
   const validLastNameInput = /^[a-zA-Z\s'-]+$/;
   const validEmailInput =  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
@@ -244,10 +257,19 @@ function validateRegisterInput(name, lastName, email, password, passwordMatch){
   } else if (password !== passwordMatch){
     alert('Passwords do not match')
   } else {
-    localStorage.setItem('registration', JSON.stringify(registration));
+    registration.firstName = name;
+    registration.lastName = lastName;
+    registration.email = email;
+    registration.password = password;
+  
+    localStorage.setItem('registration', JSON.stringify(registration))
+    closeModal ()
+  }
+
 }
 
-function validateRegistration () {
+function validateRegistration (e) {
+  e.preventDefault();
   const nameInput = document.querySelector('#first-name-register');
   const lastNameInput = document.querySelector("#last-name-register");
   const emailInput = document.querySelector("#email-register");
@@ -273,10 +295,13 @@ function validateRegistration () {
   } else if (!confirmPassword) {
       alert('Please confirm your password')
   }
-  validateRegisterInput(name, lastName, email, password, passwordMatch)
+  console.log('its working')
+  
+  // calling a function that checks if the inputs entered are correct based on the set regex rules i set.
+  validRegisterInput(name, lastName, email, password, passwordMatch);
+
 }
 
 if(submitRegister) {
   submitRegister.addEventListener('click', validateRegistration)
-  }
 }

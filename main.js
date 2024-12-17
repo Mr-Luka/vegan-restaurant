@@ -3,9 +3,20 @@ const items = Array.from(document.querySelectorAll('.slider .list .item')); // C
 const prev = document.querySelector('#prev');
 const next = document.querySelector('#next');
 const meals = document.querySelector('.meals');
+const xBtn = document.querySelector('.x-modal');
+const signupWindow = document.querySelector('.signup');
+const modalDiscount = document.querySelector('.modal-wrapper')
+const modal = document.querySelector('.modal-whole');
+const signUpBtn = document.querySelector('.sign-up');
+const submitRegister = document.querySelector('#submit-register');
+ 
 
 let active = 1; // Start at 1 (first original slide)
 let totalItems = items.length; // Total slides (including clones)
+
+
+
+
 
 // Function to reload the slider and center the active slide
 function reloadSlider() {
@@ -83,11 +94,40 @@ document.addEventListener("DOMContentLoaded", () => {
     featuredMarketing.innerHTML += featuredMarketing.innerHTML;
 });
 
+// function that will delay between requests
+function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function fetchVeganRecipesWithRetry(retries = 3, delayTime = 5000) {
+  for (let i = 0; i < retries; i++) {
+    try {
+      await fetchVeganRecipes();
+      break; // Exit loop if the fetch is successful
+    } catch (error) {
+      console.error(`Attempt ${i + 1} failed: ${error.message}`);
+      if (i < retries - 1) {
+        console.log(`Retrying in ${delayTime / 1000} seconds...`);
+        await delay(delayTime);
+      } else {
+        console.error("All retries failed.");
+      }
+    }
+  }
+}
+
+fetchVeganRecipesWithRetry();
 
 // Fetching VEGAN FOOD recipes API
 async function fetchVeganRecipes() {
   const apiUrl = "https://the-vegan-recipes-db.p.rapidapi.com/";
   const apiKey = "d3afb4afc6msh95d0b73034a9df9p1bcbb6jsncb4c4430bb66"; // Your API key
+
+  const cachedData = localStorage.getItem("veganRecipes");
+  if (cachedData) {
+    displayCachedRecipes(JSON.parse(cachedData))
+    return;
+  }
 
   try {
     const response = await fetch(apiUrl, {
@@ -103,19 +143,23 @@ async function fetchVeganRecipes() {
     }
 
     const data = await response.json();
+    localStorage.setItem("veganRecipes", JSON.stringify(data)); // Cache data
+    displayCachedRecipes(data);
     
-    // Display 3 initial recipes
-    for (let i = 0; i < 3; i++) {
-      displayRecipe(data);
-    }
 
     console.log(data); // Logs the full response object to the console
   } catch (error) {
     console.error("Error fetching data:", error.message); // Logs error if any
   }
 }
-
 fetchVeganRecipes();
+
+function displayCachedRecipes(data){
+  // Display 3 initial recipes
+    for (let i = 0; i < 3; i++) {
+      displayRecipe(data);
+    }
+}
 
 function displayRecipe(data) {
   // Ensure the random index is within the array bounds
@@ -160,3 +204,28 @@ function regenerateRecipe(meal, data) {
 
 
 
+window.addEventListener('scroll', ()=> {
+ 
+  if(window.scrollY > 500) {
+    modal.classList.remove('hidden');
+  } 
+
+  if(!modal.classList.contains('hidden')){
+      xBtn.addEventListener('click', ()=>{
+      modal.classList.add('hidden');
+      signupWindow.classList.add('hidden');
+      modalDiscount.classList.remove('hidden');
+    })
+  }
+})
+
+if(signUpBtn){
+  signUpBtn.addEventListener('click', ()=>{
+      modalDiscount.classList.add('hidden');
+      signupWindow.classList.remove('hidden');
+    })
+}
+
+if(submitRegister) {
+  submitRegister.addEventListener('click', handleRegister)
+}

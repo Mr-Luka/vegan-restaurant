@@ -11,7 +11,7 @@ const signUpBtn = document.querySelector('.sign-up');
 const submitRegister = document.querySelector('#submit-register');
 const registerInputs = document.querySelector('.register-form-inputs');
  
-
+let modalCalled = false;
 let active = 1; // Start at 1 (first original slide)
 let totalItems = items.length; // Total slides (including clones)
 
@@ -215,22 +215,27 @@ function closeModal (){
     modal.classList.add('hidden');
     signupWindow.classList.add('hidden');
     modalDiscount.classList.remove('hidden');
+    modalCalled = true;
 }
 
 // function that will activate the modal
 function openModal (){
-  window.addEventListener('scroll', ()=> {
-   
-    if(window.scrollY > 500) {
+  function handleScroll (){
+    if(window.scrollY > 500 && !modalCalled) {
       modal.classList.remove('hidden');
-    } 
+      modalCalled = true;
+      // Remove the scroll event listener after the modal is opened
+      window.removeEventListener('scroll', handleScroll);
+    }
+  }
+  // Add the scroll event listener
+  window.addEventListener('scroll', handleScroll);
   
-    if(!modal.classList.contains('hidden')){
+    if(xBtn){
         xBtn.addEventListener('click', ()=>{
         closeModal ()
       })
     }
-  })
   
   if(signUpBtn){
     signUpBtn.addEventListener('click', ()=>{
@@ -239,7 +244,10 @@ function openModal (){
       })
   }
 }
-openModal ()
+// Initialize the modal functionality
+if(!modalCalled) {
+  openModal();
+}
 
 // Validate if the entered input is equal to the given input character rules
 function validRegisterInput (name, lastName, email, password, passwordMatch){

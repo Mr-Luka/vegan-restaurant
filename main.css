@@ -30,7 +30,9 @@ header h3 {
     font-size: 1rem;
 }
 header h3:hover {
-    color: #4CAF50;
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: rgb(0, 0, 0);
+    color: #ffffff00;
 }
 header h1 {
     color: red;
@@ -313,7 +315,7 @@ div.meal {
     border-top-left-radius: 20px;
 }
 
-button.new-recipe-button {
+button.new-dish-button {
   position: absolute;
   margin-left: 12rem; 
   background-color: #fbeee0;
@@ -334,11 +336,11 @@ button.new-recipe-button {
   touch-action: manipulation;
 }
 
-button.new-recipe-button:hover {
+button.new-dish-button:hover {
   background-color: #fff;
 }
 
-button.new-recipe-button:active {
+button.new-dish-button:active {
   box-shadow: #422800 2px 2px 0 0;
   transform: translate(2px, 2px);
 }
@@ -576,7 +578,7 @@ footer h4 {
         width: 60%;
     }
 
-    button.new-recipe-button {
+    button.new-dish-button {
         transition: 0.3s;
         margin-left: 31rem;
     }
@@ -647,7 +649,7 @@ footer h4 {
         transition: 0.3s;
         width: 90%;
     }
-    button.new-recipe-button {
+    button.new-dish-button {
         transition: 0.3s;
         margin-left: 45rem;
     }

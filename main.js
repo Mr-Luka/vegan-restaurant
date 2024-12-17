@@ -104,6 +104,8 @@ async function fetchVeganRecipes() {
 
     const data = await response.json();
     displayRecipes(data);
+    displayRecipes(data);
+    displayRecipes(data);
     console.log(data); // Logs the full response object to the console
   } catch (error) {
     console.error("Error fetching data:", error.message); // Logs error if any
@@ -122,10 +124,23 @@ function displayRecipes (data){
         <div class="test-about-meal">
             <h2>${recipe.title}</h2>
         </div>
-        <button class="new-recipe-button">New Dish</button>
+        <button class="new-dish-button">New Dish</button>
         <div class="meal-image">
             <img class="meal-recepie" src="${recipe.image}" alt="meal picture">
         </div>`;
     meals.appendChild(meal);
+    newDishButtonAction ()
+    
 }
+
+function newDishButtonAction (){
+    const newDishBtn = document.querySelectorAll('.new-dish-button');
+    newDishBtn.forEach(button=>{
+        button.addEventListener('click', ()=>{
+            console.log('its working')
+            
+        })
+    })
+}
+
 

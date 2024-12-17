@@ -9,6 +9,7 @@ const modalDiscount = document.querySelector('.modal-wrapper')
 const modal = document.querySelector('.modal-whole');
 const signUpBtn = document.querySelector('.sign-up');
 const submitRegister = document.querySelector('#submit-register');
+const registerInputs = document.querySelector('.register-form-inputs');
  
 
 let active = 1; // Start at 1 (first original slide)
@@ -227,7 +228,7 @@ if(signUpBtn){
 }
 
 // function that will check if user has entered correct characters for emailInput, name, password
-function handleRegister(name, lastName, email, password, passwordMatch){
+function validateRegisterInput(name, lastName, email, password, passwordMatch){
 
   const validNameInput = /^[a-zA-Z\s'-]+$/;
   const validLastNameInput = /^[a-zA-Z\s'-]+$/;
@@ -246,7 +247,36 @@ function handleRegister(name, lastName, email, password, passwordMatch){
     localStorage.setItem('registration', JSON.stringify(registration));
 }
 
+function validateRegistration () {
+  const nameInput = document.querySelector('#first-name-register');
+  const lastNameInput = document.querySelector("#last-name-register");
+  const emailInput = document.querySelector("#email-register");
+  const passwordInput = document.querySelector("#password-register");
+  const confirmPassword = document.querySelector('#password-register-confirm');
+
+  const name = nameInput.value.trim();
+  const lastName = lastNameInput.value.trim();
+  const email = (emailInput.value.trim()).toLowerCase();
+  const password = passwordInput.value.trim();
+  const passwordMatch = confirmPassword.value.trim();
+
+  if (registerInputs.value.trim() === ''){
+    alert('please fill out the register form')
+  } else if (!name) {
+    alert('Please enter your first name')
+  } else if(!lastName){
+    alert('Please enter your last name')
+  } else if(!email) {
+    alert('Please enter your email')
+  } else if (!password){
+    alert('Please enter your password')
+  } else if (!confirmPassword) {
+      alert('Please confirm your password')
+  }
+  validateRegisterInput(name, lastName, email, password, passwordMatch)
+}
+
 if(submitRegister) {
-  submitRegister.addEventListener('click', handleRegister)
+  submitRegister.addEventListener('click', validateRegistration)
   }
 }

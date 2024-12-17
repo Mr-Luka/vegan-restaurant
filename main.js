@@ -104,9 +104,11 @@ async function fetchVeganRecipes() {
 
     const data = await response.json();
     
-    for (let i = 0; i < 3; i++){
-        displayRecipe(data)
+    // Display 3 initial recipes
+    for (let i = 0; i < 3; i++) {
+      displayRecipe(data);
     }
+
     console.log(data); // Logs the full response object to the console
   } catch (error) {
     console.error("Error fetching data:", error.message); // Logs error if any
@@ -115,34 +117,44 @@ async function fetchVeganRecipes() {
 
 fetchVeganRecipes();
 
-function displayRecipe (data){
-    const random = Math.floor(Math.random() * 385)-1;
-    const recipe = data[random];
+function displayRecipe(data) {
+  // Ensure the random index is within the array bounds
+  const randomIndex = Math.floor(Math.random() * data.length);
+  const recipe = data[randomIndex];
 
-    const meal = document.createElement('div');
-    meal.classList.add('meal');
-    meal.innerHTML = `
-        <div class="test-about-meal">
-            <h2>${recipe.title}</h2>
-        </div>
-        <button class="new-dish-button">New Dish</button>
-        <div class="meal-image">
-            <img class="meal-recepie" src="${recipe.image}" alt="meal picture">
-        </div>`;
-    meals.appendChild(meal);
-    const newDishBtn = document.querySelectorAll('.new-dish-button');
-    newDishBtn.forEach(button => {
-        button.addEventListener('click', () => {
-            meal.innerHTML = `
-        <div class="test-about-meal">
-            <h2>${recipe.title}</h2>
-        </div>
-        <button class="new-dish-button">New Dish</button>
-        <div class="meal-image">
-            <img class="meal-recepie" src="${recipe.image}" alt="meal picture">
-        </div>`;
-        });
-    });
+  const mealsContainer = document.querySelector(".meals");
+
+  const meal = document.createElement("div");
+  meal.classList.add("meal");
+  meal.innerHTML = `
+    <div class="test-about-meal">
+        <h2>${recipe.title}</h2>
+    </div>
+    <button class="new-dish-button">New Dish</button>
+    <div class="meal-image">
+        <img class="meal-recepie" src="${recipe.image}" alt="meal picture">
+    </div>`;
+
+  // Append the new meal to the container
+  mealsContainer.appendChild(meal);
+
+  // Add event listener to the button inside this meal
+  const newDishBtn = meal.querySelector(".new-dish-button");
+  newDishBtn.addEventListener("click", () => {
+    regenerateRecipe(meal, data);
+  });
+}
+
+// function that will generate new title and image of the meal
+function regenerateRecipe(meal, data) {
+  const randomIndex = Math.floor(Math.random() * data.length);
+  const newRecipe = data[randomIndex];
+
+  const recipeTitle = meal.querySelector('.test-about-meal h2');
+  const recipeImg = meal.querySelector('.meal-recepie');
+
+  recipeTitle.innerHTML = `${newRecipe.title}`;
+  recipeImg.src = `${newRecipe.image}`;
 }
 
 

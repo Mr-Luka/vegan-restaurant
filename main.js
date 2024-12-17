@@ -103,9 +103,10 @@ async function fetchVeganRecipes() {
     }
 
     const data = await response.json();
-    displayRecipes(data);
-    displayRecipes(data);
-    displayRecipes(data);
+    
+    for (let i = 0; i < 3; i++){
+        displayRecipe(data)
+    }
     console.log(data); // Logs the full response object to the console
   } catch (error) {
     console.error("Error fetching data:", error.message); // Logs error if any
@@ -114,7 +115,7 @@ async function fetchVeganRecipes() {
 
 fetchVeganRecipes();
 
-function displayRecipes (data){
+function displayRecipe (data){
     const random = Math.floor(Math.random() * 385)-1;
     const recipe = data[random];
 
@@ -129,18 +130,21 @@ function displayRecipes (data){
             <img class="meal-recepie" src="${recipe.image}" alt="meal picture">
         </div>`;
     meals.appendChild(meal);
-    newDishButtonAction ()
-    
+    const newDishBtn = document.querySelectorAll('.new-dish-button');
+    newDishBtn.forEach(button => {
+        button.addEventListener('click', () => {
+            meal.innerHTML = `
+        <div class="test-about-meal">
+            <h2>${recipe.title}</h2>
+        </div>
+        <button class="new-dish-button">New Dish</button>
+        <div class="meal-image">
+            <img class="meal-recepie" src="${recipe.image}" alt="meal picture">
+        </div>`;
+        });
+    });
 }
 
-function newDishButtonAction (){
-    const newDishBtn = document.querySelectorAll('.new-dish-button');
-    newDishBtn.forEach(button=>{
-        button.addEventListener('click', ()=>{
-            console.log('its working')
-            
-        })
-    })
-}
+
 
 

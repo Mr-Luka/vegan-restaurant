@@ -10,7 +10,12 @@ const modal = document.querySelector('.modal-whole');
 const signUpBtn = document.querySelector('.sign-up');
 const submitRegister = document.querySelector('#submit-register');
 const registerInputs = document.querySelector('.register-form-inputs');
- 
+const menu = document.querySelector('.menu');
+const findUs =  document.querySelector('.find-us');
+const ourDishes = document.querySelector('.dish-img');
+const footer = document.querySelector('footer');
+const contactUs = document.querySelector('header button');
+
 let modalCalled = false;
 let active = 1; // Start at 1 (first original slide)
 let totalItems = items.length; // Total slides (including clones)
@@ -23,6 +28,16 @@ let registration = {
     password: '',
 }
 
+
+menu.addEventListener('click', ()=>{
+  ourDishes.scrollIntoView({behavior: 'smooth', block:'center',});
+})
+findUs.addEventListener('click', ()=>{
+  footer.scrollIntoView({behavior: 'smooth', block:'center',});
+})
+contactUs.addEventListener('click', ()=>{
+  footer.scrollIntoView({behavior: 'smooth', block:'center',});
+})
 
 
 // Function to reload the slider and center the active slide
@@ -215,13 +230,26 @@ function closeModal (){
     modal.classList.add('hidden');
     signupWindow.classList.add('hidden');
     modalDiscount.classList.remove('hidden');
+    document.body.style.backgroundColor = 'rgba(255, 255, 255, 0.428)';
     modalCalled = true;
 }
+// Function to handle closing the modal when clicking outside of it
+function clickOutsideCloseModal(){
+  window.addEventListener('click',(e)=>{
+        // Check if the modal is open and the click target is not the modal or any of its children
+    if (!modal.classList.contains('hidden') && !modal.contains(e.target)){
+      closeModal();
+    }
+  })
+}
+clickOutsideCloseModal()
+
 
 // function that will activate the modal
 function openModal (){
   function handleScroll (){
     if(window.scrollY > 500 && !modalCalled) {
+      document.body.style.backgroundColor = 'rgba(142, 0, 0, 0.619)';
       modal.classList.remove('hidden');
       modalCalled = true;
       // Remove the scroll event listener after the modal is opened
